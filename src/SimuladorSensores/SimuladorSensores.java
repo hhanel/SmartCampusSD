@@ -8,22 +8,38 @@ public class SimuladorSensores {
 	
 	public static void main(String[] args) {
 
+		
 		boolean running = false;
-		Sensor sensor = new Sensor();
+		
+		String addrNet = "192.168.56.1";
+		int portaTcp = 1983;
+		int portaUdp = 1995;
+		Sensor sensor = new Sensor(addrNet);
+		
+		
 		Scanner teclado = new Scanner(System.in);
-		GerarValores geraValores = new GerarValores(sensor);
+		GerarValoresTCP geraValores = new GerarValoresTCP(sensor);
+		GerarValoresUDP geraValoresUdp = new GerarValoresUDP(sensor);
 		
 		
 		System.out.println("------Simulador de Sensores------");
-		System.out.println("1:Condições Climaticas - 2:Qualidade do ar - 9:Sair");
-		System.out.println("INFORME O TIPO DO SENSOR: ");
-		String opcao = "";
+		System.out.println("INFORME O CODIGO DO SENSOR: ");
+		String opcao = "FIND";
 		
-		while (!opcao.equals("9")) {
+		
+		while (!opcao.equals("BYE")) {			
 			opcao = teclado.nextLine();
-			if (opcao.equals("1")) {
+			
+			//procurar sensor e setar os parametros
+			//sensor.setAtributos(1000, 100, 500, 1,"TCP");
+			
+			if (opcao.equals("FIND")) {
+				System.out.println("Codigo do sensor nao encontrado, digite novamente:");
+				
+			} else if (opcao.equals("TCP")) {
 				if (!running) {
-					sensor.setAtributos(1000, 100, 500, 1);
+					sensor.setAtributos(1000, 100, 500, 1,"TCP");
+					sensor.setPorta(portaTcp);
 					Thread gerando = new Thread(geraValores);
 					gerando.start();
 					running = true;
@@ -31,27 +47,27 @@ public class SimuladorSensores {
 					System.out.println("Rodando....");
 				}
 					
-			}else if (opcao.equals("2")) {
+			}else if (opcao.equals("UDP")) {
 				if (!running) {
-					sensor.setAtributos(1000, 100, 500, 2);
-					Thread gerando = new Thread(geraValores);
+					sensor.setAtributos(1000, 100, 500, 2,"UDP");
+					sensor.setPorta(portaUdp);
+					Thread gerando = new Thread(geraValoresUdp);
 					gerando.start();
 					running = true;
 				}else {
+				
 					System.out.println("Rodando....");
+
 				}
-			}else if (opcao.equals("3")){
-				System.out.println("valor: " + geraValores.getValor() + " Sensor do tipo: " + sensor.getTipoSensor());
-			}
-			else if (opcao.equals("4")){
-				sensor.setSleep(500);
-			}else if (opcao.equals("5")){
-				sensor.setSleep(2000);
-			}else if (opcao.equals("9")){
+			}else if (opcao.equals("VALOR")){
+				System.out.println("valor: " + sensor.getValor() + " Sensor: " + sensor.getIdSensor());
+
+			}else if (opcao.equals("BYE")){
 				System.out.println("Encerrando simulador");
 				sensor.setRun(false);
+				
 			}else {
-				System.out.println("Tipo incorreto!");
+				opcao = "FIND";
 			}
 					
 		}
