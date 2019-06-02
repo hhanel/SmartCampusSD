@@ -29,6 +29,7 @@ public class SimuladorSensores {
 		
 		while (!opcao.equals("BYE")) {			
 			opcao = teclado.nextLine();
+			opcao = opcao.toUpperCase();
 			
 			//procurar sensor e setar os parametros
 			//sensor.setAtributos(1000, 100, 500, 1,"TCP");
@@ -43,6 +44,7 @@ public class SimuladorSensores {
 					Thread gerando = new Thread(geraValores);
 					gerando.start();
 					running = true;
+					System.out.println("Gerando valores para sensor do tipo TCP, digite BYE para sair!");
 				}else {
 					System.out.println("Rodando....");
 				}
@@ -54,13 +56,14 @@ public class SimuladorSensores {
 					Thread gerando = new Thread(geraValoresUdp);
 					gerando.start();
 					running = true;
+					System.out.println("Gerando valores para sensor do tipo UDP, digite BYE para sair!");
 				}else {
 				
-					System.out.println("Rodando....");
+					System.out.println("Rodando... - digite BYE para sair!");
 
 				}
 			}else if (opcao.equals("VALOR")){
-				System.out.println("valor: " + sensor.getValor() + " Sensor: " + sensor.getIdSensor());
+				System.out.println("msg: " + sensor.getValor() + " Sensor: " + sensor.getIdSensor());
 
 			}else if (opcao.equals("BYE")){
 				System.out.println("Encerrando simulador");

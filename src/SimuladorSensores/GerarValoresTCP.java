@@ -2,9 +2,6 @@ package SimuladorSensores;
 
 import java.io.PrintStream;
 import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Random;
 
 public class GerarValoresTCP implements Runnable {
@@ -26,18 +23,14 @@ public class GerarValoresTCP implements Runnable {
 		try {
 			Random gerar = new Random();
 			Socket socket = new Socket(sensor.getAddrIp(), sensor.getPorta());
-			SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy';'hh:mm:ss", new Locale("pt", "br"));
 				
 			while (sensor.getRun()) {
 				
-				this.valor = gerar.nextInt((this.sensor.getFimRang() - this.sensor.getIniRange() + 1)) + this.sensor.getIniRange();
-				sensor.setValor(valor);
+				sensor.setValor(gerar.nextInt((this.sensor.getFimRang() - this.sensor.getIniRange() + 1)) + this.sensor.getIniRange());
 				Thread.sleep(sensor.getSleep());
-				
-				String msg = this.sensor.getIdSensor() + ";"+valor +";"+ dataFormat.format(new Date());
-				
+					
 				PrintStream saida = new PrintStream (socket.getOutputStream());
-                saida.println(msg);
+                saida.println(sensor.getValor());
                 
 			}
 			socket.close();

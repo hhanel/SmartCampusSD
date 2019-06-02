@@ -1,6 +1,9 @@
 package SimuladorSensores;
 
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Sensor {
 	
@@ -13,6 +16,9 @@ public class Sensor {
 	private String addrIp;
 	private int porta;
 	private int valor;
+	private Date time;
+	private SimpleDateFormat dataFormat;
+	
 	
 	/**
 	 * Deve-se informar ip para iniciar um novo sensor
@@ -24,6 +30,7 @@ public class Sensor {
 	public Sensor(String addrIp) {
 		this.run = true;
 		this.addrIp = addrIp;
+		dataFormat = new SimpleDateFormat("dd/MM/yyyy';'HH:mm:ss", new Locale("pt", "br"));
 	}
 	
 	
@@ -109,11 +116,12 @@ public class Sensor {
 		this.porta = porta;
 	}
 	
-	public int getValor() {
-		return valor;
+	public String getValor() {
+		return (idSensor + ";"+ valor +";"+ dataFormat.format(time)).trim();
 	}
 	
 	public void setValor(int valor) {
 		this.valor = valor;
+		time = new Date();
 	}
 }
