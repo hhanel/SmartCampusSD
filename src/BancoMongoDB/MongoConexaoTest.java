@@ -70,7 +70,7 @@ public class MongoConexaoTest {
         Random random = new Random();
 
         Date data = new Date();
-        SimpleDateFormat mascara = new SimpleDateFormat("dd/MM/yy");
+        SimpleDateFormat mascara = new SimpleDateFormat("MM/dd/yy");
 
         Calendar hora = Calendar.getInstance();
         int horas = hora.get(Calendar.HOUR_OF_DAY);
@@ -78,7 +78,11 @@ public class MongoConexaoTest {
         int segundos = hora.get(Calendar.SECOND);
 
         for (int i = 1; i <= 40; ++i) {
-            vetorDadosSensor[0] = String.valueOf(i);
+            if (i % 2 == 0) {
+                vetorDadosSensor[0] = "4";
+            } else {
+                vetorDadosSensor[0] = "5";
+            }
             vetorDadosSensor[1] = String.valueOf(random.nextInt((50 - 0 + 1)) + 0);
             vetorDadosSensor[2] = mascara.format(data);
             vetorDadosSensor[3] = horas + ":" + minutos + ":" + segundos;
