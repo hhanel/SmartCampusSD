@@ -7,10 +7,12 @@ package BancoMongoDB;
 
 import com.mongodb.*;
 import com.mongodb.connection.Connection;
-import com.mongodb.util.JSON;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.text.DateFormat;
 import javax.swing.JOptionPane;
 
 import org.junit.jupiter.api.Test;
@@ -52,15 +54,14 @@ public class MongoConexao {
 
         colecao = baseDados.getCollection("Sensor");
 
-        String query
-                = "{'_id' : '" + vetorDadosSensor[0]
-                + "','Descricao' : '" + vetorDadosSensor[1]
-                + "','Latitude' : '" + vetorDadosSensor[2]
-                + "','Longitude' : '" + vetorDadosSensor[3]
-                + "','Tipo' : '" + vetorDadosSensor[4]
-                + "'}";
+        BasicDBObject novoDocumento = new BasicDBObject();
+        novoDocumento.put("_id", Integer.parseInt(vetorDadosSensor[0]));
+        novoDocumento.put("Descricao", vetorDadosSensor[1]);
+        novoDocumento.put("Latitude", Integer.parseInt(vetorDadosSensor[2]));
+        novoDocumento.put("Longitude", Integer.parseInt(vetorDadosSensor[3]));
+        novoDocumento.put("Tipo", vetorDadosSensor[4]);
 
-        colecao.insert((DBObject) JSON.parse(query));
+        colecao.insert(novoDocumento);
         return true;
     }
 
@@ -77,16 +78,15 @@ public class MongoConexao {
 
         colecao = baseDados.getCollection("TipoSensor");
 
-        String query
-                = "{'_id' : '" + vetorDadosTipoSensor[0]
-                + "','Descricao' : '" + vetorDadosTipoSensor[1]
-                + "','Comunica' : '" + vetorDadosTipoSensor[2]
-                + "','Minimo' : '" + vetorDadosTipoSensor[3]
-                + "','Maximo' : '" + vetorDadosTipoSensor[4]
-                + "','Intervalo' : '" + vetorDadosTipoSensor[5]
-                + "'}";
+        BasicDBObject novoDocumento = new BasicDBObject();
+        novoDocumento.put("_id", Integer.parseInt(vetorDadosTipoSensor[0]));
+        novoDocumento.put("Descricao", vetorDadosTipoSensor[1]);
+        novoDocumento.put("Comunica", vetorDadosTipoSensor[2]);
+        novoDocumento.put("Minimo", Integer.parseInt(vetorDadosTipoSensor[3]));
+        novoDocumento.put("Maximo", Integer.parseInt(vetorDadosTipoSensor[4]));
+        novoDocumento.put("Intervalo", Integer.parseInt(vetorDadosTipoSensor[5]));
 
-        colecao.insert((DBObject) JSON.parse(query));
+        colecao.insert(novoDocumento);
         return true;
     }
 
@@ -103,14 +103,14 @@ public class MongoConexao {
 
         colecao = baseDados.getCollection("Dados");
 
-        String query
-                = "{'ID' : '" + vetorDadoColetado[0]
-                + "','Valor' : '" + vetorDadoColetado[1]
-                + "','Data' : '" + vetorDadoColetado[2]
-                + "','Hora' : '" + vetorDadoColetado[3]
-                + "'}";
+        BasicDBObject novoDocumento = new BasicDBObject();
+        novoDocumento.put("ID", Integer.parseInt(vetorDadoColetado[0]));
+        novoDocumento.put("Valor", Integer.parseInt(vetorDadoColetado[1]));
+        novoDocumento.put("Data", new Date(vetorDadoColetado[2]));
+        novoDocumento.put("Hora", vetorDadoColetado[3]);
 
-        colecao.insert((DBObject) JSON.parse(query));
+        colecao.insert(novoDocumento);
+
         return true;
     }
 
