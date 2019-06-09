@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Recepção_Armazenamento;
+package Recepcao_Armazenamento;
 
 import com.mongodb.*;
 import com.mongodb.connection.Connection;

@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Recepção_Armazenamento;
+package Recepcao_Armazenamento;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 class UDP extends Thread { //THREAD PARA CONTROLAR SENSOR UDP
