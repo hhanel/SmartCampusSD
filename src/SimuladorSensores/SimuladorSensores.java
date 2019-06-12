@@ -5,31 +5,28 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+import org.json.JSONObject;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.SerializedName;
 
 public class SimuladorSensores {
-	
-	
-	
+
 	public static void main(String[] args) {
 
 		
 		boolean running = false;
 		
 		String addrNet = "192.168.137.252"; //Endereço de IP do concentrador
+		String portaWS = "5000";
 		int portaTcp = 1983;
 		int portaUdp = 1995;
 		String opcao = "FIND";
-		int sleep = 0;
-		int ini = 0;
-		int fim = 0;
+		int sleep = 1000;
+		int ini = 100;
+		int fim = 500;
 		int id = 0;
 		Scanner teclado = new Scanner(System.in);
 		
-		
+
 		System.out.println("------Simulador de Sensores------");
 		System.out.println("INFORME O CODIGO DO SENSOR: ");
 		
@@ -38,10 +35,12 @@ public class SimuladorSensores {
 		
 		
 		try {
-			URL url = new URL("http://localhost:3002/RestWebserviceDemo/rest/json/product/dynamicData?size=5");
+			URL url = new URL("http://"+addrNet+":"+portaWS+"/sensortype/"+opcao);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
+			
+			System.out.println("enviando requisção");
 			if (conn.getResponseCode() != 200) {
 				teclado.close();
 				throw new RuntimeException("Failed : HTTP Error code : "
@@ -52,35 +51,42 @@ public class SimuladorSensores {
 			InputStreamReader in = new InputStreamReader(conn.getInputStream());
             BufferedReader br = new BufferedReader(in);
             String output;
+            String json = "";
             while ((output = br.readLine()) != null) {
-                System.out.println(output);
+                json = json + output;
             }
             conn.disconnect();
             
-            final Gson gson = new GsonBuilder().create();
-            JsonObject json = gson.fromJson(br.toString(), JsonObject.class);
-			
-            id = json.id;
-			sleep = json.sleep;
-			ini = json.range_inicial;
-			fim = json.range_final;
-			
-            if (id == 0) {
+            JSONObject obj = new JSONObject(json);
+            
+            try {
+            	sleep = Integer.parseInt(obj.getString("minimo"));
+            	ini = Integer.parseInt(obj.getString("minimo"));
+            	fim = Integer.parseInt(obj.getString("maximo"));
+            	id = Integer.parseInt(obj.getString("id"));
+            	opcao = obj.getString("comunica");
+            }catch (Exception e) {
+            	id = 0;
+            	System.out.println("sensor nao encontrado");
             	opcao = "BYE";
-            	System.out.println("sensor nao encontrado!");
-			}else {
-				opcao = json.comunicador;
-			}
+            }
+
+            
+
 			
 		}catch (Exception e) {
 			System.out.println("Exception" + e);
 			opcao = "BYE";
 		}
 		
-		
 		Sensor sensor = new Sensor(addrNet);
 		
-		
+//		System.out.println("------Simulador de Sensores------");
+//		System.out.println("INFORME O CODIGO DO SENSOR: ");
+//		
+//		opcao = teclado.nextLine();
+//		opcao = opcao.toUpperCase();
+			
 		
 		GerarValoresTCP geraValores = new GerarValoresTCP(sensor);
 		GerarValoresUDP geraValoresUdp = new GerarValoresUDP(sensor);
@@ -123,8 +129,7 @@ public class SimuladorSensores {
 				sensor.setRun(false);
 				
 			}else {
-				   opcao = teclado.nextLine();
-				   opcao = opcao.toUpperCase();
+				System.out.println("comando incorreto");
 			}
 					
 		}
@@ -133,22 +138,4 @@ public class SimuladorSensores {
 		
 	}
 
-   static class JsonObject {
-
-    @SerializedName("id")
-    public int id;
-    @SerializedName("comunicador")
-    public String comunicador;
-    @SerializedName("sleep")
-    public int sleep;
-    @SerializedName("range_inicial")
-    public int range_inicial;
-    @SerializedName("range_final")
-    public int range_final;
-    
-    }
-	
 }
-
-
-
