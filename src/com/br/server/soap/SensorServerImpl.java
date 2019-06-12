@@ -29,7 +29,7 @@ public class SensorServerImpl implements SensorServer {
     }
 
     @Override
-    public String[] getSensor(String id) {
+    public String[] getSensor(Integer id) {
         if (!id.equals(null) & !id.isEmpty()) {
             return mongoConexao.coletarDocumentoNaColecaoSensor(id, 1, 1, 1, 1);
         } else {
@@ -61,7 +61,7 @@ public class SensorServerImpl implements SensorServer {
     }
 
     @Override
-    public String[] getTipoSensor(String id) {
+    public String[] getTipoSensor(Integer id) {
         if (!id.equals(null) & !id.isEmpty()) {
             return mongoConexao.coletarDocumentoNaColecaoTipoSensor(id, 1, 1, 1, 1, 1);
         } else {
