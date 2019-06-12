@@ -1,216 +1,322 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Classe Para Testes De Conexao Java Com Banco De Dados MongoDB
+ *
+ * Materia; Sistemas Distribuidos 2019/1 Trabalho Final; Smart Campus Sensors
+ * Docente; Marcelo Trindade Rebonatto
+ *
+ * @author Discente: Willian Muller
  */
 package BancoMongoDB;
 
 import BancoMongoDB.*;
-import BancoMongoDB.MongoConexao;
-import BancoMongoDB.MongoConexao;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
-import org.junit.*;
 
-/**
- *
- * @author WiLLian MuLLer
- */
 public class MongoConexaoTest {
 
-    public MongoConexaoTest() {
-    }
+	public MongoConexaoTest() {
+	}
 
-    // Inserir --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    @Test
-    public void testInserirDocumentoNaColecaoSensor() {
-        MongoConexao mongoConexao = new MongoConexao();
+	public static void main(String[] args) throws IOException {
 
-        String vetorDadosSensor[] = {"", "", "", "", ""};
-        Random random = new Random();
+//        testInserirDocumentoNaColecaoTipoSensor();
+//        testInserirDocumentoNaColecaoSensor();
+//        testInserirDocumentoNaColecaoDados();
+////-----------------------------------------------------------------------------------------
+//        testColetarDocumentoNaColecaoTipoSensor();
+//        testColetarDocumentoNaColecaoSensor();
+//        testColetarDocumentoNaColecaoDados();
+////-----------------------------------------------------------------------------------------
+//        testMostrarTodosDocumentosDaColecaoTipoSensor();
+//        testMostrarTodosDocumentosDaColecaoSensor();
+//        testMostrarTodosDocumentosDaColecaoDados();
+////-----------------------------------------------------------------------------------------
+//        testAlterarDocumentoNaColecaoTipoSensor();
+//        testAlterarDocumentoNaColecaoSensor();
+////-----------------------------------------------------------------------------------------
+//        testRemoverDocumentoDaColecaoTipoSensor();
+//        testRemoverDocumentoDaColecaoSensor();
+//        testRemoverDocumentoDaColecaoDados();
+////-----------------------------------------------------------------------------------------
+//        testExcluirBaseDados();
+//        testExcluirColecaoSensor();
+//        testExcluirColecaoTipoSensor();
+//        testExcluirColecaoDados();
+	}
 
-        for (int i = 1; i <= 20; ++i) {
-            vetorDadosSensor[0] = String.valueOf(i);
-            vetorDadosSensor[1] = "Sensor medidor de pressão";
-            vetorDadosSensor[2] = String.valueOf(random.nextInt((50000 - 20000 + 1)) + 20000);
-            vetorDadosSensor[3] = String.valueOf(random.nextInt((50000 - 20000 + 1)) + 20000);
-            vetorDadosSensor[4] = (i % 2 == 0) ? "TCP" : "UDP";
+//  Inserir --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testInserirDocumentoNaColecaoTipoSensor() {
 
-            mongoConexao.inserirDocumentoNaColecaoSensor(vetorDadosSensor);
-        }
-    }
+		MongoConexao mongoConexao = new MongoConexao();
 
-    @Test
-    public void testInserirDocumentoNaColecaoTipoSensor() {
-        MongoConexao mongoConexao = new MongoConexao();
+		// Efetua insercão
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("1;Sensor De Temperatura;TCP;30;50;1000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("2;Sensor De Ar;TCP;30;50;2000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("3;Sensor De Vento;TCP;30;50;3000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("4;Sensor De Raios;TCP;30;50;1000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("5;Sensor De Solar;TCP;30;50;2000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("6;Sensor De Terra;UDP;30;50;3000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("7;Sensor De Agua;UDP;30;50;1000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("8;Sensor De Pressao;UDP;30;50;2000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("9;Sensor De Clima;UDP;30;50;3000"));
 
-        String vetorDadosSensor[] = {"", "", "", "", "", ""};
-        Random random = new Random();
+		// Cancela insercão e acusa _ids ja existentes
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("1;Sensor De Temperatura;TCP;30;50;1000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("2;Sensor De Ar;TCP;30;50;2000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("3;Sensor De Vento;TCP;30;50;3000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("4;Sensor De Raios;TCP;30;50;1000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("5;Sensor De Solar;TCP;30;50;2000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("6;Sensor De Terra;UDP;30;50;3000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("7;Sensor De Agua;UDP;30;50;1000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("8;Sensor De Pressao;UDP;30;50;2000"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoTipoSensor("9;Sensor De Clima;UDP;30;50;3000"));
+	}
 
-        for (int i = 21; i <= 40; ++i) {
-            vetorDadosSensor[0] = String.valueOf(i);
-            vetorDadosSensor[1] = "Sensor medidor de temperatura";
-            vetorDadosSensor[2] = (i % 2 == 0) ? "TCP" : "UDP";
-            vetorDadosSensor[3] = String.valueOf(random.nextInt((25 - 0 + 1)) + 0);
-            vetorDadosSensor[4] = String.valueOf(random.nextInt((50 - 25 + 1)) + 25);
-            vetorDadosSensor[5] = String.valueOf(random.nextInt((5000 - 0 + 1000)) + 0);
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testInserirDocumentoNaColecaoSensor() {
 
-            mongoConexao.inserirDocumentoNaColecaoTipoSensor(vetorDadosSensor);
-        }
-    }
+		MongoConexao mongoConexao = new MongoConexao();
 
-    @Test
-    public void testInserirDocumentoNaColecaoDados() {
-        MongoConexao mongoConexao = new MongoConexao();
+		// Efetua insercão
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("11;ICEG;28.1;30.4;1"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("12;FEAR;28.1;30.4;2"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("13;DCE;28.1;30.4;3"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("14;PARQ;28.1;30.4;4"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("15;CAMP1;28.1;30.4;5"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("16;CAMP2;28.1;30.4;6"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("17;CAMP3;28.1;30.4;7"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("18;CAMP4;28.1;30.4;8"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("19;CAMP5;28.1;30.4;3"));
 
-        String vetorDadosSensor[] = {"", "", "", ""};
-        Random random = new Random();
+		// Cancela insercão e acusa _ids ja existentes
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("11;ICEG;28.1;30.4;1"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("12;FEAR;28.1;30.4;2"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("13;DCE;28.1;30.4;3"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("14;PARQ;28.1;30.4;4"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("15;CAMP1;28.1;30.4;5"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("16;CAMP2;28.1;30.4;6"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("17;CAMP3;28.1;30.4;7"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("18;CAMP4;28.1;30.4;8"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("19;CAMP5;28.1;30.4;3"));
 
-        Date data = new Date();
-        SimpleDateFormat mascara = new SimpleDateFormat("MM/dd/yy");
+		// Cancela insercão e acusa Tipos inexistentes
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("21;ICEG;28.1;30.4;11"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("22;FEAR;28.1;30.4;32"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("23;DCE;28.1;30.4;19"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("24;PARQ;28.1;30.4;34"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("25;CAMP1;28.1;30.4;15"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("26;CAMP2;28.1;30.4;26"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("27;CAMP3;28.1;30.4;27"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("28;CAMP4;28.1;30.4;18"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoSensor("29;CAMP5;28.1;30.4;33"));
+	}
 
-        Calendar hora = Calendar.getInstance();
-        int horas = hora.get(Calendar.HOUR_OF_DAY);
-        int minutos = hora.get(Calendar.MINUTE);
-        int segundos = hora.get(Calendar.SECOND);
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testInserirDocumentoNaColecaoDados() {
 
-        for (int i = 1; i <= 40; ++i) {
-            if (i % 2 == 0) {
-                vetorDadosSensor[0] = "4";
-            } else {
-                vetorDadosSensor[0] = "5";
-            }
-            vetorDadosSensor[1] = String.valueOf(random.nextInt((50 - 0 + 1)) + 0);
-            vetorDadosSensor[2] = mascara.format(data);
-            vetorDadosSensor[3] = horas + ":" + minutos + ":" + segundos;
+		MongoConexao mongoConexao = new MongoConexao();
 
-            mongoConexao.inserirDocumentoNaColecaoDados(vetorDadosSensor);
-        }
-    }
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("17;42;06/13/2019;10:28:35"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("19;31;06/13/2019;11:29:36"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("13;36;06/13/2019;12:30:37"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("12;47;06/13/2019;13:31:38"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("11;50;06/13/2019;14:32:39"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("13;39;06/13/2019;15:33:40"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("14;45;06/13/2019;16:34:41"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("11;50;06/14/2019;17:35:42"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("16;35;06/14/2019;18:36:43"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("11;41;06/14/2019;19:37:44"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("12;43;06/14/2019;20:38:45"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("15;34;06/14/2019;21:39:46"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("13;49;06/14/2019;22:40:47"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("16;30;06/15/2019;23:41:48"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("19;39;06/15/2019;01:42:49"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("14;37;06/15/2019;02:43:50"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("17;48;06/15/2019;03:44:51"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("15;47;06/15/2019;04:46:52"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("12;38;06/15/2019;05:47:53"));
+		System.out.println(mongoConexao.inserirDocumentoNaColecaoDados("19;44;06/15/2019;06:48:54"));
+	}
 
-    // Coletar --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    @Test
-    public void testColetarDocumentoNaColecaoSensor() {
-        MongoConexao mongoConexao = new MongoConexao();
+//   Coletar --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testColetarDocumentoNaColecaoTipoSensor() {
 
-        String vetor[];
+		MongoConexao mongoConexao = new MongoConexao();
+		String vetor[];
 
-        for (int i = 1; i <= 20; ++i) {
-            vetor = mongoConexao.coletarDocumentoNaColecaoSensor(String.valueOf(i), 0, 1, 1, 1);
-            System.out.println("\nId: " + vetor[0] + "\nDescricao: " + vetor[1] + "\nLatitude: " + vetor[2] + "\nLongitude: " + vetor[3] + "\nTipo: " + vetor[4]);
-        }
-    }
+		// Efetua Coleta
+		for (int i = 1; i <= 9; ++i) {
+			vetor = mongoConexao.coletarDocumentoNaColecaoTipoSensor(i, 1, 1, 1, 1, 1);
+			System.out.println("\nId: " + vetor[0] + "\nDescricao: " + vetor[1] + "\nComunica: " + vetor[2] + "\nMinimo: " + vetor[3] + "\nMaximo: " + vetor[4] + "\nIntervalo: " + vetor[5]);
+		}
+		// Acusa que Id nao foi encontrado.
+		for (int i = 10; i <= 19; ++i) {
+			vetor = mongoConexao.coletarDocumentoNaColecaoTipoSensor(i, 1, 1, 1, 1, 1);
+			System.out.println("\nId: " + vetor[0] + "\nDescricao: " + vetor[1] + "\nComunica: " + vetor[2] + "\nMinimo: " + vetor[3] + "\nMaximo: " + vetor[4] + "\nIntervalo: " + vetor[5]);
+		}
+	}
 
-    @Test
-    public void testColetarDocumentoNaColecaoTipoSensor() {
-        MongoConexao mongoConexao = new MongoConexao();
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testColetarDocumentoNaColecaoSensor() {
 
-        String vetor[];
+		MongoConexao mongoConexao = new MongoConexao();
+		String vetor[];
 
-        for (int i = 21; i <= 40; ++i) {
-            vetor = mongoConexao.coletarDocumentoNaColecaoTipoSensor(String.valueOf(i), 0, 1, 1, 1, 0);
-            System.out.println("\nId: " + vetor[0] + "\nDescricao: " + vetor[1] + "\nComunica: " + vetor[2] + "\nMinimo: " + vetor[3] + "\nMaximo: " + vetor[4] + "\nIntervalo: " + vetor[5]);
-        }
-    }
+		// Acusa que Id nao foi encontrado.
+		for (int i = 1; i <= 10; ++i) {
+			vetor = mongoConexao.coletarDocumentoNaColecaoSensor(i, 0, 1, 1, 1);
+			System.out.println("\nId: " + vetor[0] + "\nDescricao: " + vetor[1] + "\nLatitude: " + vetor[2] + "\nLongitude: " + vetor[3] + "\nTipo: " + vetor[4]);
+		}
+		// Efetua Coleta
+		for (int i = 11; i <= 19; ++i) {
+			vetor = mongoConexao.coletarDocumentoNaColecaoSensor(i, 0, 1, 1, 1);
+			System.out.println("\nId: " + vetor[0] + "\nDescricao: " + vetor[1] + "\nLatitude: " + vetor[2] + "\nLongitude: " + vetor[3] + "\nTipo: " + vetor[4]);
+		}
+	}
 
-    @Test
-    public void testColetarDocumentoNaColecaoDados() {
-        MongoConexao mongoConexao = new MongoConexao();
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testColetarDocumentoNaColecaoDados() {
 
-        ArrayList<String[]> listaDocumentosColetado = mongoConexao.coletarDocumentoNaColecaoDados("2", 1, 1, 1);
+		MongoConexao mongoConexao = new MongoConexao();
+		ArrayList<String[]> listaDocumentosColetado;
 
-        for (int i = 0; i < listaDocumentosColetado.size(); ++i) {
-            System.out.println("\nID: " + listaDocumentosColetado.get(i)[0] + "\nValor: " + listaDocumentosColetado.get(i)[1] + "\nData: " + listaDocumentosColetado.get(i)[2] + "\nHora: " + listaDocumentosColetado.get(i)[3]);
-        }
-    }
+		// Encontra Documento
+		listaDocumentosColetado = mongoConexao.coletarDocumentoNaColecaoDados(11, 1, 1, 1);
 
-    // Mostrar -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    @Test
-    public void testMostrarDocumentosDaColecaoSensor() {
-        MongoConexao mongoConexao = new MongoConexao();
+		for (int i = 0; i < listaDocumentosColetado.size(); ++i) {
+			System.out.println("\nID: " + listaDocumentosColetado.get(i)[0] + "\nValor: " + listaDocumentosColetado.get(i)[1] + "\nData: " + listaDocumentosColetado.get(i)[2] + "\nHora: " + listaDocumentosColetado.get(i)[3]);
+		}
+	}
 
-        ArrayList<String[]> listaDocumentosColetado = mongoConexao.mostrarDocumentosDaColecaoSensor();
+	// Mostrar Todos-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testMostrarTodosDocumentosDaColecaoTipoSensor() {
 
-        for (int i = 0; i < listaDocumentosColetado.size(); ++i) {
-            System.out.println("\n_id: " + listaDocumentosColetado.get(i)[0] + "\nDescricao: " + listaDocumentosColetado.get(i)[1] + "\nLatitude: " + listaDocumentosColetado.get(i)[2] + "\nLongitude: " + listaDocumentosColetado.get(i)[3] + "\nTipo: " + listaDocumentosColetado.get(i)[4]);
-        }
-    }
+		MongoConexao mongoConexao = new MongoConexao();
+		ArrayList<String[]> listaDocumentosColetado = mongoConexao.mostrarTodosDocumentosDaColecaoTipoSensor();
 
-    @Test
-    public void testMostrarDocumentosDaColecaoTipoSensor() {
-        MongoConexao mongoConexao = new MongoConexao();
+		for (int i = 0; i < listaDocumentosColetado.size(); ++i) {
+			System.out.println("\n_id: " + listaDocumentosColetado.get(i)[0] + "\nDescricao: " + listaDocumentosColetado.get(i)[1] + "\nComunica: " + listaDocumentosColetado.get(i)[2] + "\nMinimo: " + listaDocumentosColetado.get(i)[3] + "\nMaximo: " + listaDocumentosColetado.get(i)[4] + "\nIntervalo: " + listaDocumentosColetado.get(i)[5]);
+		}
+	}
 
-        ArrayList<String[]> listaDocumentosColetado = mongoConexao.mostrarDocumentosDaColecaoTipoSensor();
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testMostrarTodosDocumentosDaColecaoSensor() {
 
-        for (int i = 0; i < listaDocumentosColetado.size(); ++i) {
-            System.out.println("\n_id: " + listaDocumentosColetado.get(i)[0] + "\nDescricao: " + listaDocumentosColetado.get(i)[1] + "\nComunica: " + listaDocumentosColetado.get(i)[2] + "\nMinimo: " + listaDocumentosColetado.get(i)[3] + "\nMaximo: " + listaDocumentosColetado.get(i)[4] + "\nIntervalo: " + listaDocumentosColetado.get(i)[5]);
-        }
-    }
+		MongoConexao mongoConexao = new MongoConexao();
+		ArrayList<String[]> listaDocumentosColetado = mongoConexao.mostrarTodosDocumentosDaColecaoSensor();
 
-    @Test
-    public void testMostrarDocumentosDaColecaoDados() {
-        MongoConexao mongoConexao = new MongoConexao();
+		for (int i = 0; i < listaDocumentosColetado.size(); ++i) {
+			System.out.println("\n_id: " + listaDocumentosColetado.get(i)[0] + "\nDescricao: " + listaDocumentosColetado.get(i)[1] + "\nLatitude: " + listaDocumentosColetado.get(i)[2] + "\nLongitude: " + listaDocumentosColetado.get(i)[3] + "\nTipo: " + listaDocumentosColetado.get(i)[4]);
+		}
+	}
 
-        ArrayList<String[]> listaDocumentosColetado = mongoConexao.mostrarDocumentosDaColecaoDados();
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testMostrarTodosDocumentosDaColecaoDados() {
 
-        for (int i = 0; i < listaDocumentosColetado.size(); ++i) {
-            System.out.println("\nID: " + listaDocumentosColetado.get(i)[0] + "\nValor: " + listaDocumentosColetado.get(i)[1] + "\nData: " + listaDocumentosColetado.get(i)[2] + "\nHora: " + listaDocumentosColetado.get(i)[3]);
-        }
-    }
+		MongoConexao mongoConexao = new MongoConexao();
+		ArrayList<String[]> listaDocumentosColetado = mongoConexao.mostrarTodosDocumentosDaColecaoDados();
 
-    // Remover ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    @Test
-    public void testRemoverDocumentoDaColecaoSensor() {
-        MongoConexao mongoConexao = new MongoConexao();
+		for (int i = 0; i < listaDocumentosColetado.size(); ++i) {
+			System.out.println("\nID: " + listaDocumentosColetado.get(i)[0] + "\nValor: " + listaDocumentosColetado.get(i)[1] + "\nData: " + listaDocumentosColetado.get(i)[2] + "\nHora: " + listaDocumentosColetado.get(i)[3]);
+		}
+	}
 
-        for (int i = 1; i <= 20; ++i) {
-            mongoConexao.removerDocumentoDaColecaoSensor(String.valueOf(i));
-        }
-    }
+// Alterar -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testAlterarDocumentoNaColecaoTipoSensor() {
+		MongoConexao mongoConexao = new MongoConexao();
 
-    @Test
-    public void testRemoverDocumentoDaColecaoTipoSensor() {
-        MongoConexao mongoConexao = new MongoConexao();
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "_id", "4"));                                    // Acusa jnao poder alterar chave primaria
 
-        for (int i = 21; i <= 40; ++i) {
-            mongoConexao.removerDocumentoDaColecaoTipoSensor(String.valueOf(i));
-        }
-    }
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "Descricao", "Sensor De RUV"));  // Atualiza
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "Descricao", "Sensor De RUV"));  // Acusa ja estar com este valor
 
-    @Test
-    public void testRemoverDocumentoDaColecaoDados() {
-        MongoConexao mongoConexao = new MongoConexao();
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "Comunica", "UDP"));                   // Atualiza
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "Comunica", "UDP"));                   // Acusa ja estar com este valor
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "Comunica", "TDP"));                   // Acusa comunicacao invalida
 
-        for (int i = 1; i <= 40; ++i) {
-            mongoConexao.removerDocumentoDaColecaoDados(String.valueOf(i));
-        }
-    }
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "Minimo", "31"));                           // Atualiza
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "Minimo", "31"));                           // Acusa ja estar com este valor
 
-    // Excluir --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    @Test
-    public void testExcluirBaseDados() {
-        MongoConexao mongoConexao = new MongoConexao();
-        mongoConexao.excluirBaseDados();
-    }
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "Maximo", "49"));                         // Atualiza
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "Maximo", "49"));                         // Acusa ja estar com este valor
 
-    @Test
-    public void testExcluirColecaoSensor() {
-        MongoConexao mongoConexao = new MongoConexao();
-        mongoConexao.excluirColecaoSensor();
-    }
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "Intervalo", "1000"));                   // Atualiza
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoTipoSensor(3, "Intervalo", "1000"));                   // Acusa ja estar com este valor
 
-    @Test
-    public void testExcluirColecaoTipoSensor() {
-        MongoConexao mongoConexao = new MongoConexao();
-        mongoConexao.excluirColecaoTipoSensor();
-    }
+	}
 
-    @Test
-    public void testExcluirColecaoDados() {
-        MongoConexao mongoConexao = new MongoConexao();
-        mongoConexao.excluirColecaoDados();
-    }
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testAlterarDocumentoNaColecaoSensor() {
+
+		MongoConexao mongoConexao = new MongoConexao();
+
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoSensor(14, "_id", "12"));                                  // Acusa jnao poder alterar chave primaria
+
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoSensor(14, "Tipo", "6"));                                 // Atualiza
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoSensor(14, "Tipo", "6"));                                 // Acusa ja estar com este valor
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoSensor(14, "Tipo", "13"));                               // Acusa tipo invalido
+
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoSensor(14, "Descricao", "DCE"));                   // Atualiza
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoSensor(14, "Descricao", "DCE"));                   // Acusa ja estar com este valor
+
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoSensor(14, "Latitude", "25.2"));                       // Atualiza
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoSensor(14, "Latitude", "25.2"));                       // Acusa ja estar com este valor
+
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoSensor(14, "Longitude", "28.6"));                    // Atualiza
+		System.out.println(mongoConexao.alterarDocumentoNaColecaoSensor(14, "Longitude", "28.6"));                    // Acusa ja estar com este valor
+	}
+
+	// Remover ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testRemoverDocumentoDaColecaoTipoSensor() {
+
+		MongoConexao mongoConexao = new MongoConexao();
+
+		for (int i = 1; i <= 20; ++i) {
+			System.out.println(mongoConexao.removerDocumentoDaColecaoTipoSensor(i));
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testRemoverDocumentoDaColecaoSensor() {
+
+		MongoConexao mongoConexao = new MongoConexao();
+
+		for (int i = 1; i <= 20; ++i) {
+			System.out.println(mongoConexao.removerDocumentoDaColecaoSensor(i));
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testRemoverDocumentoDaColecaoDados() {
+
+		MongoConexao mongoConexao = new MongoConexao();
+
+		for (int i = 1; i <= 20; ++i) {
+			System.out.println(mongoConexao.removerDocumentoDaColecaoDados(i));
+		}
+	}
+
+	// Excluir Base De Dados-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testExcluirBaseDados() {
+		MongoConexao mongoConexao = new MongoConexao();
+		mongoConexao.excluirBaseDados();
+	}
+
+	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testExcluirColecaoSensor() {
+		MongoConexao mongoConexao = new MongoConexao();
+		mongoConexao.excluirColecaoSensor();
+	}
+
+	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testExcluirColecaoTipoSensor() {
+		MongoConexao mongoConexao = new MongoConexao();
+		mongoConexao.excluirColecaoTipoSensor();
+	}
+
+	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public static void testExcluirColecaoDados() {
+		MongoConexao mongoConexao = new MongoConexao();
+		mongoConexao.excluirColecaoDados();
+	}
 }
