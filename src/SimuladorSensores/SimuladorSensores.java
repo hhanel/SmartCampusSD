@@ -15,25 +15,24 @@ public class SimuladorSensores {
 		
 		boolean running = false;
 		
-		String addrNet = "192.168.137.252"; //Endereço de IP do concentrador
+		String addrNet = "192.168.137.104"; //Endereço de IP do concentrador
 		String portaWS = "5000";
 		int portaTcp = 1983;
 		int portaUdp = 1995;
-		String opcao = "FIND";
+		String opcao = "BYE";
 		int sleep = 1000;
 		int ini = 100;
 		int fim = 500;
 		int id = 0;
 		Scanner teclado = new Scanner(System.in);
 		
-
 		System.out.println("------Simulador de Sensores------");
 		System.out.println("INFORME O CODIGO DO SENSOR: ");
 		
 		opcao = teclado.nextLine();
 		opcao = opcao.toUpperCase();
 		
-		
+		/*
 		try {
 			URL url = new URL("http://"+addrNet+":"+portaWS+"/sensortype/"+opcao);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -60,33 +59,31 @@ public class SimuladorSensores {
             JSONObject obj = new JSONObject(json);
             
             try {
-            	sleep = Integer.parseInt(obj.getString("minimo"));
-            	ini = Integer.parseInt(obj.getString("minimo"));
-            	fim = Integer.parseInt(obj.getString("maximo"));
-            	id = Integer.parseInt(obj.getString("id"));
-            	opcao = obj.getString("comunica");
+            	
+            	sleep = (int) obj.getJSONObject("Resposta").get("Intervalo");
+            	ini = (int) obj.getJSONObject("Resposta").get("Minimo");
+            	fim = (int) obj.getJSONObject("Resposta").get("Maximo");
+            	id = (int) obj.getJSONObject("Resposta").get("_idSensor");
+            	opcao = obj.getJSONObject("Resposta").getString("Comunica");
             }catch (Exception e) {
             	id = 0;
             	System.out.println("sensor nao encontrado");
             	opcao = "BYE";
             }
 
-            
-
-			
 		}catch (Exception e) {
-			System.out.println("Exception" + e);
+			System.out.println("Erro ao gerar a requisiçãoWS: " + e);
 			opcao = "BYE";
 		}
-		
+		*/
 		Sensor sensor = new Sensor(addrNet);
+		/*
+		System.out.println("------Simulador de Sensores------");
+		System.out.println("INFORME O CODIGO DO SENSOR: ");
 		
-//		System.out.println("------Simulador de Sensores------");
-//		System.out.println("INFORME O CODIGO DO SENSOR: ");
-//		
-//		opcao = teclado.nextLine();
-//		opcao = opcao.toUpperCase();
-			
+		opcao = teclado.nextLine();
+		opcao = opcao.toUpperCase();
+		*/	
 		
 		GerarValoresTCP geraValores = new GerarValoresTCP(sensor);
 		GerarValoresUDP geraValoresUdp = new GerarValoresUDP(sensor);
@@ -129,7 +126,8 @@ public class SimuladorSensores {
 				sensor.setRun(false);
 				
 			}else {
-				System.out.println("comando incorreto");
+				//System.out.println("comando incorreto");
+				opcao = teclado.nextLine();
 			}
 					
 		}

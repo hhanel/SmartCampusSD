@@ -30,7 +30,7 @@ public class Sensor {
 	public Sensor(String addrIp) {
 		this.run = true;
 		this.addrIp = addrIp;
-		dataFormat = new SimpleDateFormat("MM/dd/yy';'HH:mm:ss", new Locale("pt", "br"));
+		dataFormat = new SimpleDateFormat("MM/dd/yy';'HH:mm:ss';'", new Locale("pt", "br"));
 	}
 	
 	
