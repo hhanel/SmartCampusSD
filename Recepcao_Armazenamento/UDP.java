@@ -37,8 +37,8 @@ class UDP extends Thread { //THREAD PARA CONTROLAR SENSOR UDP
             
             String msg = new String(pct.getData());
             
-            /*MongoConexao mongoConexao = new MongoConexao();
-            mongoConexao.inserirDocumentoNaColecaoDados(msg);*/
+            MongoConexao mongoConexao = new MongoConexao();
+            mongoConexao.inserirDocumentoNaColecaoDados(msg);
             System.out.println("UDP: " + msg +" " + this.getName());
             soc.close();
         }
