@@ -35,8 +35,8 @@ class TCP extends Thread { //THREAD PARA CONTROLAR SENSOR TCP
             msg = respostaCliente.nextLine();
             
             System.out.println("TCP: " + this.getName() + " "+ msg);
-            /*MongoConexao mongoConexao = new MongoConexao();
-            mongoConexao.inserirDocumentoNaColecaoDados(msg);*/
+            MongoConexao mongoConexao = new MongoConexao();
+            mongoConexao.inserirDocumentoNaColecaoDados(msg);
         }
         System.out.println("encerrou: " + this.getName() + " " + soc.getPort());
         try {
