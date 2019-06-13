@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "cbf1310d-be02-4ed6-beb3-5c00973463c0",
+		"name": "### Projeto SD ###",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Consulta Sensor HTML",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/consulta/sensor?tipSensor=1&dadoSensor=false&data=10-06-2019&codSensor=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"consulta",
+						"sensor"
+					],
+					"query": [
+						{
+							"key": "tipSensor",
+							"value": "1",
+							"description": "Retorna as informações referentes ao tipo de sensor especifico"
+						},
+						{
+							"key": "dadoSensor",
+							"value": "false",
+							"description": "Retorna ou não os dados do sensor, se 'true' ou nao enviado o sensor deve ter dados para ser trazido"
+						},
+						{
+							"key": "data",
+							"value": "10-06-2019",
+							"description": "Retorna as informações somente de uma data determinada"
+						},
+						{
+							"key": "codSensor",
+							"value": "1",
+							"description": "Retorna as informações referente ao sensor específico"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Sensor Json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/consulta/sensor/json?tipSensor=1&dadoSensor=false&codSensor=1&data=10-06-2019",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"consulta",
+						"sensor",
+						"json"
+					],
+					"query": [
+						{
+							"key": "tipSensor",
+							"value": "1",
+							"description": "Retorna as informações referentes ao tipo de sensor específico"
+						},
+						{
+							"key": "dadoSensor",
+							"value": "false",
+							"description": "Retorna ou não os dados do sensor, se 'true' ou nao enviado o sensor deve ter dados para ser trazido"
+						},
+						{
+							"key": "codSensor",
+							"value": "1",
+							"description": "Retorna as informações referente ao sensor específico"
+						},
+						{
+							"key": "data",
+							"value": "10-06-2019",
+							"description": "Retorna as informações somente de uma data determinada"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insere Dados",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"codSensor\": \"1\",\n\t\"valor\": 10.1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/insere/dados",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"insere",
+						"dados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insere Sensor",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"codSensor\": \"16\",\n\t\"desSensor\": \"Sensor de ar\",\n\t\"latitude\": \"56.40\",\n\t\"longitude\": \"40.65\",\n\t\"tipSensor\": \"2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/insere/sensor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"insere",
+						"sensor"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

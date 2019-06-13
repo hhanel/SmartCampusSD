@@ -1,0 +1,467 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API REST - Consulta Dados Sensores",
+    "description": "API para integração com a base para consulta dos sensores e dos dados registrados.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/consulta",
+  "x-axway": {
+    "corsEnabled": true,
+    "basePaths": [
+      ""
+    ],
+    "serviceType": "rest",
+    "deprecated": false
+  },
+  "tags": [
+    {
+      "name": "Consulta Sensores e Dados"
+    },
+    {
+      "name": "Insere Sensores e Dados"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/sensor": {
+      "get": {
+        "tags": [
+          "Consulta Sensores e Dados"
+        ],
+        "parameters": [
+          {
+            "name": "tipSensor",
+            "type": "string",
+            "description": "Retorna as informações referentes ao tipo de sensor específico",
+            "in": "query"
+          },
+          {
+            "name": "codSensor",
+            "type": "string",
+            "description": "Retorna as informações referente ao código do sensor específico",
+            "in": "query"
+          },
+          {
+            "name": "dadoSensor",
+            "type": "boolean",
+            "description": "Retorna ou não os dados do sensor, se true ou nao enviado o sensor deve ter dados para ser trazido",
+            "in": "query"
+          },
+          {
+            "name": "data",
+            "type": "string",
+            "description": "Retorna as informações somente de uma data determinada",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ação realizada com Sucesso, retorno do HTML com as informações e dashboard"
+          },
+          "400": {
+            "description": "Informação incorrreta para realizar a ação",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "erros": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Erro"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro Interno no Servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "erros": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Erro"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sensor/json": {
+      "get": {
+        "tags": [
+          "Consulta Sensores e Dados"
+        ],
+        "parameters": [
+          {
+            "name": "tipSensor",
+            "type": "string",
+            "description": "Retorna as informações referentes ao tipo de sensor específico",
+            "in": "query"
+          },
+          {
+            "name": "codSensor",
+            "type": "string",
+            "description": "Retorna as informações referente ao código do sensor específico",
+            "in": "query"
+          },
+          {
+            "name": "dadoSensor",
+            "type": "boolean",
+            "description": "Retorna ou não os dados do sensor, se true ou nao enviado o sensor deve ter dados para ser trazido",
+            "in": "query"
+          },
+          {
+            "name": "data",
+            "type": "string",
+            "description": "Retorna as informações somente de uma data determinada",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ação realizada com Sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sensor"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Informação incorrreta para realizar a ação",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "erros": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Erro"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro Interno no Servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "erros": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Erro"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/insere/dados": {
+      "post": {
+        "tags": [
+          "Insere Sensores e Dados"
+        ],
+        "parameters": [
+          {
+            "name": "BodyRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BodyInsereDados"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ação realizada com Sucesso",
+            "schema": {
+              "$ref": "#/definitions/BodyInsereDadosSucesso"
+            }
+          },
+          "400": {
+            "description": "Informação incorrreta para realizar a ação",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "erros": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Erro"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro Interno no Servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "erros": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Erro"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/insere/sensor": {
+      "post": {
+        "tags": [
+          "Insere Sensores e Dados"
+        ],
+        "parameters": [
+          {
+            "name": "BodyRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BodyInsereSensor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ação realizada com Sucesso",
+            "schema": {
+              "$ref": "#/definitions/BodyInsereSensorSucesso"
+            }
+          },
+          "400": {
+            "description": "Informação incorrreta para realizar a ação",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "erros": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Erro"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro Interno no Servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "erros": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Erro"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Sensor": {
+      "properties": {
+        "documentoOrigem": {
+          "$ref": "#/definitions/DadosSensor"
+        }
+      }
+    },
+    "DadosSensor": {
+      "description": "Informações sobre o sensor",
+      "properties": {
+        "codSensor": {
+          "type": "number",
+          "description": "Código único do sensor",
+          "example": 1
+        },
+        "latitude": {
+          "type": "number",
+          "description": "Latitude da localização do sensor",
+          "example": 10.5
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude da localização do sensor",
+          "example": 20.6
+        },
+        "tipSensor": {
+          "type": "number",
+          "description": "Codigo do tipo do sensor",
+          "example": 1
+        },
+        "desTipoSensor": {
+          "type": "string",
+          "description": "Descrição do tipo de sensor",
+          "example": "Sensor de ar"
+        },
+        "comunicacao": {
+          "type": "string",
+          "description": "Comunicação utilizada pelo sensor (UDP, TCP)",
+          "example": "UDP"
+        },
+        "minimo": {
+          "type": "number",
+          "description": "Valor minimo a ser gerado pelo sensor",
+          "example": 10
+        },
+        "maximo": {
+          "type": "number",
+          "description": "Valor maximo a ser gerado pelo sensor",
+          "example": 100
+        },
+        "intervalo": {
+          "type": "string",
+          "description": "Intervalo em segundos de amostragem",
+          "example": "10seg"
+        },
+        "Response": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dados"
+          }
+        }
+      }
+    },
+    "Dados": {
+      "description": "Informações no body para cadastro dos dados",
+      "properties": {
+        "Data": {
+          "type": "string",
+          "description": "Descrição",
+          "example": "05/05/2019"
+        },
+        "Valor": {
+          "type": "number",
+          "description": "Descrição",
+          "example": 50
+        }
+      }
+    },
+    "BodyInsereDados": {
+      "properties": {
+        "codSensor": {
+          "type": "string",
+          "description": "Código de identificação do sensor na base",
+          "example": 10
+        },
+        "valor": {
+          "type": "number",
+          "description": "valor do dado que sera cadastrados na base",
+          "example": 250.55
+        }
+      },
+      "required": [
+        "codSensor",
+        "valor"
+      ]
+    },
+    "BodyInsereDadosSucesso": {
+      "properties": {
+        "codSensor": {
+          "type": "string",
+          "description": "Código de identificação do sensor na base",
+          "example": 10
+        },
+        "seqDados": {
+          "type": "number",
+          "description": "Sequence cadastrado na base",
+          "example": 123
+        },
+        "data": {
+          "type": "string",
+          "description": "Data e hora da gravação",
+          "example": "10-06-2019 12:55"
+        },
+        "valor": {
+          "type": "number",
+          "description": "Valor do dado cadastrado na base",
+          "example": 250.55
+        },
+        "mensagem": {
+          "type": "number",
+          "description": "Retorno da mensagem de sucesso",
+          "example": "Dados inseridos na base com sucesso!"
+        }
+      }
+    },
+    "BodyInsereSensor": {
+      "properties": {
+        "codSensor": {
+          "type": "string",
+          "description": "Código de identificação do sensor na base",
+          "example": 10
+        },
+        "desSensor": {
+          "type": "string",
+          "description": "Descrição do sensor",
+          "example": "Sensor de ar"
+        },
+        "latitude": {
+          "type": "string",
+          "description": "Coordenada da posição do sensor",
+          "example": 56.4
+        },
+        "longitude": {
+          "type": "string",
+          "description": "Coordenada da posição do sensor",
+          "example": 40.65
+        },
+        "tipSensor": {
+          "type": "string",
+          "description": "Código do tipo de sensor cadastrado na base",
+          "example": 2
+        }
+      },
+      "required": [
+        "codSensor",
+        "desSensor",
+        "latitude",
+        "longitude",
+        "tipSensor"
+      ]
+    },
+    "BodyInsereSensorSucesso": {
+      "properties": {
+        "mensagem": {
+          "type": "string",
+          "description": "Retorno da mensagem de sucesso",
+          "example": "Sensor 10-Sensor de ar, cadastrado com sucesso!"
+        }
+      }
+    },
+    "Erro": {
+      "properties": {
+        "mensagem": {
+          "type": "string",
+          "description": "Informação sobre o erro ocorrido.",
+          "example": "Mensagem de erro retornada"
+        }
+      }
+    }
+  }
+}
